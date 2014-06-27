@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +25,7 @@ public class BrouwerServiceImpl implements BrouwerService {
 
 	@Override
 	@Transactional(readOnly=false)
+	@PreAuthorize("hasRole('administrator')")
 	public void create(Brouwer brouwer) {
 		brouwerDAO.save(brouwer);
 		
